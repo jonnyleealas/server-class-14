@@ -24,6 +24,7 @@ const load = (req, res, next) => {
   const fileName = `${modelsFolder}/${modelName}/${modelName}-model.js`;
   const Model = require(fileName);
   req.model = Model;
+  next();
 };
 
 

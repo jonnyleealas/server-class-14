@@ -9,7 +9,7 @@ const users = require('../models/users-model.js');
 // Initialize Express Router
 const router = express.Router();
 
-router.post('/signup', async (req, res, next) => {
+router.post('/signup', async (req, res, next) => {``
 
   try {
     let obj = {
@@ -24,7 +24,6 @@ router.post('/signup', async (req, res, next) => {
     let newUser = await record.save();
 
     let token = record.generateToken();
-
     res.set('auth',token);
     let object = {
       token: token,

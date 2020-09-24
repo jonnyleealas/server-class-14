@@ -14,6 +14,7 @@ module.exports = async (req, res, next) => {
 
     req.user = validUser;
     req.token = token;
+    
     next();
 
   } catch (e) {
