@@ -23,7 +23,7 @@ const load = (req, res, next) => {
   const modelName = req.params.model.replace(/[^a-z0-9-_]/gi, '');
   const fileName = `${modelsFolder}/${modelName}/${modelName}-model.js`;
   const Model = require(fileName);
-  req.model = Model;
+  req.model = new Model;
   next();
 };
 
