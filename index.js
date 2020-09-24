@@ -1,6 +1,6 @@
 'use strict';
 // dependencies
-require('dotenv').config(); //must require dotenv because mongo needs env
+require('dotenv').config(); 
 let mongoose = require('mongoose');
 let server = require('./server.js');
 

@@ -1,11 +1,11 @@
 'use strict';
-
+require('dotenv').config(); 
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 const users = mongoose.Schema({
-  username: { type: String, required: true, unique: true },
+  username: { type: String, required: true },
   password: { type: String, required: true }
 })
 
@@ -15,15 +15,15 @@ users.pre('save', async function () {
 });
 
 // Works with an instance, ie. userRecord.generateToken()
-function generateToken() {
+users.methods.generateToken = function () {
   let tokenObject = {
     username: this.username,
   }
-  let token = jwt.sign(tokenObject, process.env.SHOES)
+  let token = jwt.sign(tokenObject, process.env.SECRET)
   return token;
 }
 
-// Works without an instace, ie. users.validateBasic()
+// Works without an instance, ie. users.validateBasic()
 users.statics.validateBasic = async function (username, password) {
 
   // Look up the user by the username
@@ -39,7 +39,7 @@ users.statics.validateBasic = async function (username, password) {
 
 users.statics.authenticateWithToken = async function (token) {
   try {
-    const parsedToken = jwt.verify(token, process.env.SHOES);
+    const parsedToken = jwt.verify(token, process.env.SECRET);
     const user = this.findOne({ username: parsedToken.username })
     return user;
   } catch (e) {

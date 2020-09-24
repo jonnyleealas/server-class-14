@@ -13,9 +13,7 @@ module.exports = async (req, res, next) => {
     // Get the username and password from the user
     // It will be in the headers
     let authorization = req.headers.authorization;
-    console.log('authfuck:', authorization)
     let encoded = authorization.split(' ')[1]
-    console.log('endcodedfuck',encoded)
     let creds = base64.decode(encoded);
     let [username, password] = creds.split(":");
 
